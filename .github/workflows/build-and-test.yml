@@ -37,4 +37,4 @@ jobs:
 
     - name: Test
       id: test1
-      run: dotnet test ./TestProject1.sln --framework ${{ matrix.framework }} --logger:"console;verbosity=detailed"
+      run: dotnet test ./TestProject.sln --framework ${{ matrix.framework }} --logger:"console;verbosity=detailed"
