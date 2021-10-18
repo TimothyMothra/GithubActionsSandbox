@@ -4,8 +4,10 @@ param ([string]$TestResultFile = $(throw "Path to Test Run (.trx) is required.")
 # This script will inspect a dotnet test result file (*.trx).
 # Any failed tests will be retried upto a max value.
 
+Write-Host "inputs:"
 Write-Host "TestResultFile $TestResultFile"
 Write-Host "WorkingDirectory $WorkingDirectory"
+Write-Host ""
 
 [int]$maxRetries = 3;
 
@@ -51,8 +53,8 @@ if ($outcome -eq "Failed")
             [bool]$retryResult = $false;
             for($i=0; $i -lt $maxRetries -and $retryResult -eq $false ; $i++)
             {
-                $logPath = "$logDirectoryRetries\$($definition.TestMethod.className).$($definition.TestMethod.name)_$i.trx";
-                dotnet test $($definition.TestMethod.codeBase) --logger "trx;LogFileName=$logPath" --filter "ClassName=$($definition.TestMethod.className)&Name=$($definition.TestMethod.name)" | Out-Null
+                $logPath = "$logDirectoryRetries/$($definition.TestMethod.className).$($definition.TestMethod.name)_$i.trx";
+                dotnet test $($definition.TestMethod.codeBase) --logger "trx;LogFileName=$logPath" --filter "ClassName=$($definition.TestMethod.className)&Name=$($definition.TestMethod.name)" #| Out-Null
 
                 [xml]$retryXml = Get-Content -Path $logPath -ErrorAction Stop
                 $retryOutcome = $retryXml.TestRun.ResultSummary.outcome;
