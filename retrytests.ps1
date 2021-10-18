@@ -8,13 +8,14 @@ param ([string]$TestResultFile = $(throw "Path to Test Run (.trx) is required.")
 
 # Write-Host "PSScriptRoot $PSScriptRoot";
 #$inputTrx = "$PSScriptRoot\example_testResults.trx"; # hardcoded for testing
-
-$logDirectoryRetries = Join-Path -Path $PSScriptRoot -ChildPath "RetryResults";
+$location = Get-Location
+Write-Host $location;
+$logDirectoryRetries = Join-Path -Path $location -ChildPath "RetryResults";
 
 # INSPECT TEST RUN RESULTS
 [xml]$xmlElm = Get-Content -Path $TestResultFile
 $outcome = $xmlElm.TestRun.ResultSummary.outcome;
-Write-Host "Parsing TestRun '$inputTrx' Outcome: '$outcome'";
+Write-Host "Parsing TestRun '$TestResultFile' Outcome: '$outcome'";
 
 # IF TEST RUN RESULTS FAILED, START RETRY
 if ($outcome -eq "Failed")

@@ -38,8 +38,8 @@ jobs:
     - name: Test
       id: test1
       continue-on-error: true
-      run: dotnet test ./TestProject.sln --framework ${{ matrix.framework }} --logger:"console;verbosity=detailed" --logger "trx;logfilename=testResults.trx" --results-directory ./
+      run: dotnet test ./TestProject.sln --framework ${{ matrix.framework }} --logger:"console;verbosity=detailed" --logger "trx;logfilename=$GITHUB_WORKSPACE/testResults.trx" # --results-directory ./
 
     - name: Retry tests
       if: steps.test1.outcome=='failure'
-      run: pwsh -f ./retrytests.ps1 ./testResults.trx
+      run: pwsh -f ./retrytests.ps1 $GITHUB_WORKSPACE/testResults.trx
