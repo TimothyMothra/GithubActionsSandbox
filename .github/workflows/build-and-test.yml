@@ -37,6 +37,7 @@ jobs:
 
     - name: Test
       id: test1
+      continue-on-error: true
       run: dotnet test ./TestProject.sln --framework ${{ matrix.framework }} --logger:"console;verbosity=detailed" --logger "trx;logfilename=testResults.trx" --results-directory ./
 
     - name: Retry tests
