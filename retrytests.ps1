@@ -4,6 +4,9 @@ param ([string]$TestResultFile = $(throw "Path to Test Run (.trx) is required.")
 # This script will inspect a dotnet test result file (*.trx).
 # Any failed tests will be retried upto a max value.
 
+Write-Host "TestResultFile $TestResultFile"
+Write-Host "WorkingDirectory $WorkingDirectory"
+
 [int]$maxRetries = 3;
 
 # Write-Host "PSScriptRoot $PSScriptRoot";
@@ -11,7 +14,7 @@ param ([string]$TestResultFile = $(throw "Path to Test Run (.trx) is required.")
 $logDirectoryRetries = Join-Path -Path $WorkingDirectory -ChildPath "RetryResults";
 
 # INSPECT TEST RUN RESULTS
-[xml]$xmlElm = Get-Content -Path $TestResultFile
+[xml]$xmlElm = Get-Content -Path $TestResultFile -ErrorAction Stop
 $outcome = $xmlElm.TestRun.ResultSummary.outcome;
 Write-Host "Parsing TestRun '$TestResultFile' Outcome: '$outcome'";
 
@@ -50,7 +53,7 @@ if ($outcome -eq "Failed")
                 $logPath = "$logDirectoryRetries\$($definition.TestMethod.className).$($definition.TestMethod.name)_$i.trx";
                 dotnet test $($definition.TestMethod.codeBase) --logger "trx;LogFileName=$logPath" --filter "ClassName=$($definition.TestMethod.className)&Name=$($definition.TestMethod.name)" | Out-Null
 
-                [xml]$retryXml = Get-Content -Path $logPath
+                [xml]$retryXml = Get-Content -Path $logPath -ErrorAction Stop
                 $retryOutcome = $retryXml.TestRun.ResultSummary.outcome;
                 $retryResult = ($retryOutcome -ne "Failed");
                 Write-Host "Retry #$i Outcome: '$retryOutcome' Passed: $retryResult"
