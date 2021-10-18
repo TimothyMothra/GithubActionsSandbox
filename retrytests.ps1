@@ -1,8 +1,4 @@
-Param(
-    [Parameter(Mandatory=$true,HelpMessage="Path to Test Run (.trx)")]
-    [string]
-    inputTrx
-) 
+param ([string]$TestResultFile = $(throw "Path to Test Run (.trx) is required."))
 
 # SUMMARY
 # This script will inspect a dotnet test result file (*.trx).
@@ -16,7 +12,7 @@ Param(
 $logDirectoryRetries = Join-Path -Path $PSScriptRoot -ChildPath "RetryResults";
 
 # INSPECT TEST RUN RESULTS
-[xml]$xmlElm = Get-Content -Path $inputTrx
+[xml]$xmlElm = Get-Content -Path $TestResultFile
 $outcome = $xmlElm.TestRun.ResultSummary.outcome;
 Write-Host "Parsing TestRun '$inputTrx' Outcome: '$outcome'";
 
