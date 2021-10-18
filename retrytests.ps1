@@ -5,8 +5,8 @@ param ([string]$TestResultFile = $(throw "Path to Test Run (.trx) is required.")
 # Any failed tests will be retried upto a max value.
 
 Write-Host "inputs:"
-Write-Host "TestResultFile $TestResultFile"
-Write-Host "WorkingDirectory $WorkingDirectory"
+Write-Host "-TestResultFile $TestResultFile"
+Write-Host "-WorkingDirectory $WorkingDirectory"
 Write-Host ""
 
 [int]$maxRetries = 3;
@@ -17,18 +17,18 @@ $logDirectoryRetries = Join-Path -Path $WorkingDirectory -ChildPath "RetryResult
 New-Item -Path $logDirectoryRetries -ItemType directory -ErrorAction Stop
 
 # INSPECT TEST RUN RESULTS
-[xml]$xmlElm = Get-Content -Path $TestResultFile -ErrorAction Stop
-Write-Host "Parsing TestRun '$TestResultFile' Outcome: '$($xmlElm.TestRun.ResultSummary.outcome)' Failed: '$($xmlElm.TestRun.ResultSummary.Counters.failed)'";
+[xml]$testRunXml = Get-Content -Path $TestResultFile -ErrorAction Stop
+Write-Host "Parsing TestRun '$TestResultFile' Outcome: '$($testRunXml.TestRun.ResultSummary.outcome)' Failed: '$($testRunXml.TestRun.ResultSummary.Counters.failed)'";
 
 # IF TEST RUN RESULTS FAILED, START RETRY
-if ($outcome -eq "Failed")
+if ($testRunXml.TestRun.ResultSummary.outcome -eq "Failed")
 {
     Write-Host "Detected TestRun failed, will retry tests $maxRetries times.";
 
-    $results = $xmlElm.TestRun.Results.UnitTestResult
+    $results = $testRunXml.TestRun.Results.UnitTestResult
     Write-Debug "TestResults: $($results.Count)";
 
-    $testDefinitions = $xmlElm.TestRun.TestDefinitions.UnitTest;
+    $testDefinitions = $testRunXml.TestRun.TestDefinitions.UnitTest;
     Write-Debug "TestDefinitions: $($testDefinitions.Count)";
 
     [bool]$scriptResult = $true;
