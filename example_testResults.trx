@@ -1,13 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TestRun id="f10d4b1d-5154-41c4-aba0-3e01074ae5d4" name="xxxxx 2021-10-14 18:52:49" runUser="xxxxx" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
-  <Times creation="2021-10-14T18:52:49.8104964-07:00" queuing="2021-10-14T18:52:49.8104967-07:00" start="2021-10-14T18:52:49.1999496-07:00" finish="2021-10-14T18:52:49.8226133-07:00" />
-  <TestSettings name="default" id="183afb21-2a8e-4a13-a048-f8947840caaf">
-    <Deployment runDeploymentRoot="xxxxx_2021-10-14_18_52_49" />
+<TestRun id="02d9da5e-03a3-488e-831c-aca89f9a4049" name="Mothr@TL-XPS 2021-10-18 14:17:24" runUser="TL-XPS\Mothr" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2021-10-18T14:17:24.6878814-07:00" queuing="2021-10-18T14:17:24.6878815-07:00" start="2021-10-18T14:17:24.1069595-07:00" finish="2021-10-18T14:17:24.6991734-07:00" />
+  <TestSettings name="default" id="0e2855fc-6104-4e29-ab8a-d5f7b60728a9">
+    <Deployment runDeploymentRoot="Mothr_TL-XPS_2021-10-18_14_17_24" />
   </TestSettings>
   <Results>
-    <UnitTestResult executionId="57cd14cf-a370-4ead-aac0-8117480aa3d2" testId="b9e3ad3f-f170-4f5e-67ca-b34533b6c598" testName="ThisTestWillRandomlyPassOrFail" computerName="xxxxx" duration="00:00:00.0000683" startTime="2021-10-14T18:52:49.6874784-07:00" endTime="2021-10-14T18:52:49.6876222-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="57cd14cf-a370-4ead-aac0-8117480aa3d2" />
-    <UnitTestResult executionId="3e4f6d19-d0c1-4e6f-ab5e-199e6ae068ff" testId="144dd749-8ca2-96a3-48fc-e738c9e2acdf" testName="ThisTestWillPass" computerName="xxxxx" duration="00:00:00.0018337" startTime="2021-10-14T18:52:49.6471596-07:00" endTime="2021-10-14T18:52:49.6689950-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="3e4f6d19-d0c1-4e6f-ab5e-199e6ae068ff" />
-    <UnitTestResult executionId="4a43740c-a22a-45dd-bb8a-bab74fca1b44" testId="e4093354-2b1b-0f0e-9680-02723a3d4ced" testName="ThisTestWillFail" computerName="xxxxx" duration="00:00:00.0140005" startTime="2021-10-14T18:52:49.6731758-07:00" endTime="2021-10-14T18:52:49.6874324-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="4a43740c-a22a-45dd-bb8a-bab74fca1b44">
+    <UnitTestResult executionId="8f58595e-2528-4277-967b-0e3af8d7da93" testId="144dd749-8ca2-96a3-48fc-e738c9e2acdf" testName="ThisTestWillPass" computerName="TL-XPS" duration="00:00:00.0023722" startTime="2021-10-18T14:17:24.5257176-07:00" endTime="2021-10-18T14:17:24.5469655-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8f58595e-2528-4277-967b-0e3af8d7da93" />
+    <UnitTestResult executionId="41a89825-cb75-4ae1-b386-33f4afb4e320" testId="b9e3ad3f-f170-4f5e-67ca-b34533b6c598" testName="ThisTestWillRandomlyPassOrFail" computerName="TL-XPS" duration="00:00:00.0004496" startTime="2021-10-18T14:17:24.5662196-07:00" endTime="2021-10-18T14:17:24.5667626-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="41a89825-cb75-4ae1-b386-33f4afb4e320">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.IsTrue failed. </Message>
+          <StackTrace>   at TestProject.UnitTest1.ThisTestWillRandomlyPassOrFail() in C:\REPOS\GithubActionsSandbox\UnitTest1.cs:line 21&#xD;
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="eef2a6fa-baf7-427b-b88a-4e64210a6716" testId="e4093354-2b1b-0f0e-9680-02723a3d4ced" testName="ThisTestWillFail" computerName="TL-XPS" duration="00:00:00.0140352" startTime="2021-10-18T14:17:24.5518164-07:00" endTime="2021-10-18T14:17:24.5661687-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="eef2a6fa-baf7-427b-b88a-4e64210a6716">
       <Output>
         <ErrorInfo>
           <Message>Assert.Fail failed. </Message>
@@ -19,28 +27,28 @@
   </Results>
   <TestDefinitions>
     <UnitTest name="ThisTestWillPass" storage="c:\repos\githubactionssandbox\bin\debug\net5.0\testproject.dll" id="144dd749-8ca2-96a3-48fc-e738c9e2acdf">
-      <Execution id="3e4f6d19-d0c1-4e6f-ab5e-199e6ae068ff" />
+      <Execution id="8f58595e-2528-4277-967b-0e3af8d7da93" />
       <TestMethod codeBase="C:\REPOS\GithubActionsSandbox\bin\Debug\net5.0\TestProject.dll" adapterTypeName="executor://mstestadapter/v2" className="TestProject.UnitTest1" name="ThisTestWillPass" />
     </UnitTest>
     <UnitTest name="ThisTestWillRandomlyPassOrFail" storage="c:\repos\githubactionssandbox\bin\debug\net5.0\testproject.dll" id="b9e3ad3f-f170-4f5e-67ca-b34533b6c598">
-      <Execution id="57cd14cf-a370-4ead-aac0-8117480aa3d2" />
+      <Execution id="41a89825-cb75-4ae1-b386-33f4afb4e320" />
       <TestMethod codeBase="C:\REPOS\GithubActionsSandbox\bin\Debug\net5.0\TestProject.dll" adapterTypeName="executor://mstestadapter/v2" className="TestProject.UnitTest1" name="ThisTestWillRandomlyPassOrFail" />
     </UnitTest>
     <UnitTest name="ThisTestWillFail" storage="c:\repos\githubactionssandbox\bin\debug\net5.0\testproject.dll" id="e4093354-2b1b-0f0e-9680-02723a3d4ced">
-      <Execution id="4a43740c-a22a-45dd-bb8a-bab74fca1b44" />
+      <Execution id="eef2a6fa-baf7-427b-b88a-4e64210a6716" />
       <TestMethod codeBase="C:\REPOS\GithubActionsSandbox\bin\Debug\net5.0\TestProject.dll" adapterTypeName="executor://mstestadapter/v2" className="TestProject.UnitTest1" name="ThisTestWillFail" />
     </UnitTest>
   </TestDefinitions>
   <TestEntries>
-    <TestEntry testId="b9e3ad3f-f170-4f5e-67ca-b34533b6c598" executionId="57cd14cf-a370-4ead-aac0-8117480aa3d2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="144dd749-8ca2-96a3-48fc-e738c9e2acdf" executionId="3e4f6d19-d0c1-4e6f-ab5e-199e6ae068ff" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
-    <TestEntry testId="e4093354-2b1b-0f0e-9680-02723a3d4ced" executionId="4a43740c-a22a-45dd-bb8a-bab74fca1b44" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="144dd749-8ca2-96a3-48fc-e738c9e2acdf" executionId="8f58595e-2528-4277-967b-0e3af8d7da93" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b9e3ad3f-f170-4f5e-67ca-b34533b6c598" executionId="41a89825-cb75-4ae1-b386-33f4afb4e320" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e4093354-2b1b-0f0e-9680-02723a3d4ced" executionId="eef2a6fa-baf7-427b-b88a-4e64210a6716" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
   </TestEntries>
   <TestLists>
     <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
     <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
   </TestLists>
   <ResultSummary outcome="Failed">
-    <Counters total="3" executed="3" passed="2" failed="1" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Counters total="3" executed="3" passed="1" failed="2" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
   </ResultSummary>
 </TestRun>
