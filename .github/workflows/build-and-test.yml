@@ -42,4 +42,4 @@ jobs:
 
     - name: Retry tests
       if: steps.test1.outcome=='failure'
-      run: pwsh -f ./retrytests.ps1 $GITHUB_WORKSPACE/testResults.trx
+      run: pwsh -f ./retrytests.ps1 -TestResultFile $GITHUB_WORKSPACE/testResults.trx -WorkingDirectory $GITHUB_WORKSPACE

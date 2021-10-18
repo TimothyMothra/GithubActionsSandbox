@@ -1,4 +1,4 @@
-param ([string]$TestResultFile = $(throw "Path to Test Run (.trx) is required."))
+param ([string]$TestResultFile = $(throw "Path to Test Run (.trx) is required."), [string]$WorkingDirectory = $(throw "Path to write retry test runs is required."))
 
 # SUMMARY
 # This script will inspect a dotnet test result file (*.trx).
@@ -8,9 +8,7 @@ param ([string]$TestResultFile = $(throw "Path to Test Run (.trx) is required.")
 
 # Write-Host "PSScriptRoot $PSScriptRoot";
 #$inputTrx = "$PSScriptRoot\example_testResults.trx"; # hardcoded for testing
-$location = Get-Location
-Write-Host $location;
-$logDirectoryRetries = Join-Path -Path $location -ChildPath "RetryResults";
+$logDirectoryRetries = Join-Path -Path $WorkingDirectory -ChildPath "RetryResults";
 
 # INSPECT TEST RUN RESULTS
 [xml]$xmlElm = Get-Content -Path $TestResultFile
