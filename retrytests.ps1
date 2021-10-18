@@ -1,7 +1,17 @@
+Param(
+    [Parameter(Mandatory=$true,HelpMessage="Path to Test Run (.trx)")]
+    [string]
+    inputTrx,
+) 
+
+# SUMMARY
+# This script will inspect a dotnet test result file (*.trx).
+# Any failed tests will be retried upto a max value.
+
 [int]$maxRetries = 3;
 
 # Write-Host "PSScriptRoot $PSScriptRoot";
-$inputTrx = "$PSScriptRoot\example_testResults.trx"; # hardcoded for testing
+#$inputTrx = "$PSScriptRoot\example_testResults.trx"; # hardcoded for testing
 
 $logDirectoryRetries = Join-Path -Path $PSScriptRoot -ChildPath "RetryResults";
 

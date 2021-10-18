@@ -38,3 +38,7 @@ jobs:
     - name: Test
       id: test1
       run: dotnet test ./TestProject.sln --framework ${{ matrix.framework }} --logger:"console;verbosity=detailed" --logger "trx;logfilename=testResults.trx" --results-directory ./
+
+    - name: Retry tests
+      if: steps.test1.outcome=='failure'
+      run: ./retrytests.ps1 ./testResults.trx
