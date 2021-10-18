@@ -1,7 +1,7 @@
 Param(
     [Parameter(Mandatory=$true,HelpMessage="Path to Test Run (.trx)")]
     [string]
-    inputTrx,
+    inputTrx
 ) 
 
 # SUMMARY
