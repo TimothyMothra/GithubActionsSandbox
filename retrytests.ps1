@@ -12,6 +12,7 @@ Write-Host "WorkingDirectory $WorkingDirectory"
 # Write-Host "PSScriptRoot $PSScriptRoot";
 #$inputTrx = "$PSScriptRoot\example_testResults.trx"; # hardcoded for testing
 $logDirectoryRetries = Join-Path -Path $WorkingDirectory -ChildPath "RetryResults";
+New-Item -Path $logDirectoryRetries -ItemType directory -ErrorAction Stop
 
 # INSPECT TEST RUN RESULTS
 [xml]$xmlElm = Get-Content -Path $TestResultFile -ErrorAction Stop
