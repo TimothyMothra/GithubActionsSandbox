@@ -18,8 +18,7 @@ New-Item -Path $logDirectoryRetries -ItemType directory -ErrorAction Stop
 
 # INSPECT TEST RUN RESULTS
 [xml]$xmlElm = Get-Content -Path $TestResultFile -ErrorAction Stop
-$outcome = $xmlElm.TestRun.ResultSummary.outcome;
-Write-Host "Parsing TestRun '$TestResultFile' Outcome: '$outcome'";
+Write-Host "Parsing TestRun '$TestResultFile' Outcome: '$($xmlElm.TestRun.ResultSummary.outcome)' Failed: '$($xmlElm.TestRun.ResultSummary.Counters.failed)'";
 
 # IF TEST RUN RESULTS FAILED, START RETRY
 if ($outcome -eq "Failed")
@@ -54,7 +53,7 @@ if ($outcome -eq "Failed")
             for($i=0; $i -lt $maxRetries -and $retryResult -eq $false ; $i++)
             {
                 $logPath = "$logDirectoryRetries/$($definition.TestMethod.className).$($definition.TestMethod.name)_$i.trx";
-                dotnet test $($definition.TestMethod.codeBase) --logger "trx;LogFileName=$logPath" --filter "ClassName=$($definition.TestMethod.className)&Name=$($definition.TestMethod.name)" #| Out-Null
+                dotnet test $($definition.TestMethod.codeBase) --logger "trx;LogFileName=$logPath" --filter "ClassName=$($definition.TestMethod.className)&Name=$($definition.TestMethod.name)" | Out-Null
 
                 [xml]$retryXml = Get-Content -Path $logPath -ErrorAction Stop
                 $retryOutcome = $retryXml.TestRun.ResultSummary.outcome;
