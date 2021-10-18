@@ -1,6 +1,7 @@
 param ([string]$TestResultFile = $(throw "Path to Test Run (.trx) is required."), [string]$WorkingDirectory = $(throw "Path to write retry test runs is required."))
 
 # SUMMARY
+# The `dotnet test cli` will not automaticalyl retry failed tests.
 # This script will inspect a dotnet test result file (*.trx).
 # Any failed tests will be retried upto a max value.
 
@@ -11,11 +12,6 @@ Write-Host ""
 
 [int]$maxRetries = 3;
 
-# Write-Host "PSScriptRoot $PSScriptRoot";
-#$inputTrx = "$PSScriptRoot\example_testResults.trx"; # hardcoded for testing
-$logDirectoryRetries = Join-Path -Path $WorkingDirectory -ChildPath "RetryResults";
-New-Item -Path $logDirectoryRetries -ItemType directory -ErrorAction Stop
-
 # INSPECT TEST RUN RESULTS
 [xml]$testRunXml = Get-Content -Path $TestResultFile -ErrorAction Stop
 Write-Host "Parsing TestRun '$TestResultFile' Outcome: '$($testRunXml.TestRun.ResultSummary.outcome)' Failed: '$($testRunXml.TestRun.ResultSummary.Counters.failed)'";
@@ -25,10 +21,13 @@ if ($testRunXml.TestRun.ResultSummary.outcome -eq "Failed")
 {
     Write-Host "Detected TestRun failed, will retry tests $maxRetries times.";
 
-    $results = $testRunXml.TestRun.Results.UnitTestResult
-    Write-Debug "TestResults: $($results.Count)";
+    # CREATE DIRECTORY FOR RETRY OUTPUTS
+    $logDirectoryRetries = Join-Path -Path $WorkingDirectory -ChildPath "RetryResults";
+    New-Item -Path $logDirectoryRetries -ItemType directory -ErrorAction Stop | Out-Null
 
+    $results = $testRunXml.TestRun.Results.UnitTestResult
     $testDefinitions = $testRunXml.TestRun.TestDefinitions.UnitTest;
+    Write-Debug "TestResults: $($results.Count)";
     Write-Debug "TestDefinitions: $($testDefinitions.Count)";
 
     [bool]$scriptResult = $true;
