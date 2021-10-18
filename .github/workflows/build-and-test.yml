@@ -42,4 +42,4 @@ jobs:
 
     - name: Retry tests
       if: steps.test1.outcome=='failure'
-      run: pwsh -f .\retrytests.ps1 .\testResults.trx
+      run: pwsh -f ./retrytests.ps1 ./testResults.trx
