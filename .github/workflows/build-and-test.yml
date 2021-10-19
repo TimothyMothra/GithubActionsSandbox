@@ -48,12 +48,4 @@ jobs:
     - name: Retry tests
       if: steps.test1.outcome=='failure'
       run: pwsh -f ./retrytests.ps1 -TestResultFile ${{ github.workspace }}/testResults.trx -WorkingDirectory ${{ github.workspace }}
-
-  all-successful:
-    # https://github.community/t/is-it-possible-to-require-all-github-actions-tasks-to-pass-without-enumerating-them/117957/4?u=graingert
-    runs-on: ubuntu-latest
-    if: ${{ always() }}
-    needs: [build-test]
-    steps:
-    - name: verify that all previous jobs succeded 
-      run: echo "Done."
+      
