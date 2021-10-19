@@ -48,3 +48,8 @@ jobs:
     - name: Retry tests
       if: steps.test1.outcome=='failure'
       run: pwsh -f ./retrytests.ps1 -TestResultFile ${{ github.workspace }}/testResults.trx -WorkingDirectory ${{ github.workspace }}
+
+  verify:
+    runs-on: ubuntu-latest
+    if: ${{ always() }}
+    needs: [build-test]
