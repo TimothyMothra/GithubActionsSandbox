@@ -18,6 +18,7 @@ jobs:
     
     env:
       SOLUTION: ./TestProject.sln
+      TEST_RESULTS_DIRECTORY: ${{ github.workspace }}/TestResults
 
     strategy:
       fail-fast: false
@@ -46,9 +47,9 @@ jobs:
     - name: Test
       id: test1
       continue-on-error: true
-      run: dotnet test ${{ env.SOLUTION }} --framework ${{ matrix.framework }} --logger:"console;verbosity=detailed" --logger:"trx;logfilename=${{ github.workspace }}/testResults.trx"
+      run: dotnet test ${{ env.SOLUTION }} --framework ${{ matrix.framework }} --results-directory ${{ env.TEST_RESULTS_DIRECTORY }} --logger:"console;verbosity=detailed" --logger:"trx;logfileprefix=testResults_"
 
     - name: Retry tests
       if: steps.test1.outcome=='failure'
-      run: pwsh -f ./retrytests.ps1 -TestResultFile ${{ github.workspace }}/testResults.trx -WorkingDirectory ${{ github.workspace }}
+      run: pwsh -f ./retrytests.ps1 -TestResultsDirectory ${{ env.TEST_RESULTS_DIRECTORY }}/testResults.trx -WorkingDirectory ${{ github.workspace }}
       
