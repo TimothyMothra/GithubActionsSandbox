@@ -10,6 +10,11 @@ Write-Host "-TestResultsDirectory: $TestResultsDirectory"
 Write-Host "-WorkingDirectory: $WorkingDirectory"
 Write-Host ""
 
+if (-not (Test-Path $TestResultsDirectory)) {
+    Write-Error -Message "Test Results Directory does not exist." -ErrorAction Stop
+}
+
+
 [int]$maxRetries = 5;
 [int]$secondsBetweenRetries = 5;
 
