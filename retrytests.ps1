@@ -15,7 +15,7 @@ if (-not (Test-Path $TestResultsDirectory)) {
 }
 
 
-[int]$maxRetries = 5;
+[int]$maxRetries = 3;
 [int]$secondsBetweenRetries = 5;
 
 $logDirectoryRetries = Join-Path -Path $WorkingDirectory -ChildPath "RetryResults";
@@ -36,12 +36,14 @@ Write-Host ""
 
 
 [bool]$scriptResult = $true;
-$ScriptSummary = @();
+$RetrySummary = @();
+$FailedAfterRetrySummary = @();
 
 foreach($trx in $trxFiles)
 {
     # INSPECT TEST RUN RESULTS
     [xml]$testRunXml = Get-Content -Path $trx -ErrorAction Stop
+    Write-Host ""
     Write-Host "Parsing TestRun '$trx' Outcome: '$($testRunXml.TestRun.ResultSummary.outcome)' Failed Count: '$($testRunXml.TestRun.ResultSummary.Counters.failed)'";
 
     # IF TEST RUN RESULTS FAILED, START RETRY
@@ -71,6 +73,8 @@ foreach($trx in $trxFiles)
                     Write-Error -Message "TEST DEFINITION NOT FOUND" -ErrorAction Stop
                 }
 
+                $RetrySummary += "$($definition.TestMethod.className).$($definition.TestMethod.name)"
+
                 Write-Host ""
                 Write-Host "$($definition.TestMethod.codeBase) $($definition.TestMethod.className).$($definition.TestMethod.name) $($result.outcome)"
 
@@ -92,7 +96,7 @@ foreach($trx in $trxFiles)
 
                 if ($retryResult -eq $false)
                 {
-                    $ScriptSummary += "$($definition.TestMethod.className).$($definition.TestMethod.name)"
+                    $FailedAfterRetrySummary += "$($definition.TestMethod.className).$($definition.TestMethod.name)"
                 }
 
                 $scriptResult = $scriptResult -band $retryResult;
@@ -101,6 +105,21 @@ foreach($trx in $trxFiles)
         }
     }
 }
+
+
+Write-Host ""
+Write-Host ""
+Write-Host "========== ========== ========== =========="
+Write-Host ""
+Write-Host ""
+
+Write-Host "The following tests were retried:"
+foreach($line in $RetrySummary)
+{
+    Write-Host "-$line"
+}
+
+
 
 Write-Host ""
 Write-Host ""
@@ -115,7 +134,7 @@ if ($scriptResult)
 else {
     Write-Host "The following tests failed after retry:"
 
-    foreach($line in $ScriptSummary)
+    foreach($line in $FailedAfterRetrySummary)
     {
         Write-Host "- $line";
     }
