@@ -15,6 +15,9 @@ jobs:
   build-test:
 
     runs-on: ${{ matrix.os }}
+    
+    env:
+      SOLUTION: ./TestProject.sln
 
     strategy:
       fail-fast: false
@@ -35,15 +38,15 @@ jobs:
         include-prerelease: true
         
     - name: restore
-      run: dotnet restore ./TestProject.sln
+      run: dotnet restore ${{ env.SOLUTION }}
 
     - name: Build
-      run: dotnet build ./TestProject.sln
+      run: dotnet build ${{ env.SOLUTION }}
 
     - name: Test
       id: test1
       continue-on-error: true
-      run: dotnet test ./TestProject.sln --framework ${{ matrix.framework }} --logger:"console;verbosity=detailed" --logger:"trx;logfilename=${{ github.workspace }}/testResults.trx"
+      run: dotnet test ${{ env.SOLUTION }} --framework ${{ matrix.framework }} --logger:"console;verbosity=detailed" --logger:"trx;logfilename=${{ github.workspace }}/testResults.trx"
 
     - name: Retry tests
       if: steps.test1.outcome=='failure'
