@@ -51,5 +51,5 @@ jobs:
 
     - name: Retry tests
       if: steps.test1.outcome=='failure'
-      run: pwsh -f ./retrytests.ps1 -TestResultsDirectory ${{ env.TEST_RESULTS_DIRECTORY }}/testResults.trx -WorkingDirectory ${{ github.workspace }}
+      run: pwsh -f ./retrytests.ps1 -TestResultsDirectory ${{ env.TEST_RESULTS_DIRECTORY }} -WorkingDirectory ${{ github.workspace }}
       

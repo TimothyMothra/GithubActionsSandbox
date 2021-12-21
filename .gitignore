@@ -7,3 +7,9 @@
 /obj
 /RetryResults
 /TestResults
+/TestProject/bin/Debug
+/TestProject/obj
+/TestProject2/bin/Debug/net6.0
+/TestProject2/obj
+/TestProject/TestResults
+/TestProject2/TestResults
